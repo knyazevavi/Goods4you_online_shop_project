@@ -1,0 +1,145 @@
+.cart {
+  position: relative;
+  max-height: 990px;
+  min-height: 100vh;
+  width: 100%;
+  color: var(--color-gray900);
+}
+
+.cartContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1180px;
+  width: 100%;
+  height: 714px;
+  margin: 48px auto;
+}
+
+.cartTitle {
+  width: 100%;
+  text-align: left;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+}
+
+.cartContent {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  height: 566px;
+  width: 100%;
+  margin: 46px auto;
+}
+
+.cartForm {
+  position: relative;
+  width: 65%;
+  height: 566px;
+  border: 1px solid var(--color-gray500);
+  border-radius: 4px;
+  padding: 20px 40px;
+  gap: 10px;
+}
+
+.cartList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-gray200);
+  border-radius: 6px;
+  height: 124px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.itemRemoved {
+  background-color: var(--color-white);
+  cursor: default;
+  border: 1px solid var(--color-gray100);
+}
+
+.itemRemoved .itemDetails,
+.itemRemoved .itemPrice,
+.itemRemoved .itemTitle {
+  color: var(--color-gray500);
+  text-decoration: none;
+}
+
+.itemRemoved:hover {
+  background-color: var(--color-white);
+}
+
+.itemRemoved .buttonCartIcon {
+  opacity: 1;
+}
+
+.itemHover {
+  background-color: var(--color-gray200);
+}
+
+.itemLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemImage {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+
+.imgRemoved {
+  opacity: 0.2;
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemTitle {
+  font-size: var(--font-size-m);
+  color: var(--color-gray900);
+  line-height: 22px;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.itemTitle:hover {
+  text-decoration: underline;
+}
+
+.itemRemovedTitle:hover {
+  text-decoration: none;
+  cursor: default;
+}
+
+.itemPrice {
+  font-size: var(--font-size-l);
+  line-height: 22px;
+  font-weight: var(--font-weight-regular);
+  margin: 5px 0 0;
+}
+
+.itemControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 286px;
+  gap: 10px;
+  height: 50px;
+}
