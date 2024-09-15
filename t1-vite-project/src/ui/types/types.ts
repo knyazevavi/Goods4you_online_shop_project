@@ -1,7 +1,7 @@
 import { CartItem } from "../../types/interfaces";
 
 export interface ButtonProps {
-    id?: number;
+    id?: number | undefined;
     href?: string;
     name?: string;
     selectedItems?: CartItem[];
@@ -12,4 +12,12 @@ export interface ButtonProps {
     quantity?: number;
     flag?: boolean;
     isRemoved?: boolean;
+    productIdx?: number[];
+}
+
+export interface ButtonCartProps {
+    id: number;
+    onAdd: () => void;
+    onDelete: () => void;
+    productIdx?: number[];
 }

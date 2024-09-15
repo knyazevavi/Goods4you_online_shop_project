@@ -14,7 +14,6 @@ const ButtonCartIcon: React.FC<ButtonProps> = ({ onAdd, isRemoved }) => {
           ? `${styles.buttonCartIcon} ${styles.removedState}`
           : styles.buttonCartIcon
       }
-      aria-label="Add to cart"
     >
       <CartIcon />
     </button>

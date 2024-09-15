@@ -4,13 +4,15 @@ import styles from "./AddControl.module.css";
 
 interface AddControlProps {
   quantity: number;
+  onDelete: () => void;
 }
 
-const AddControl: React.FC<AddControlProps> = ({ quantity }) => {
+const AddControl: React.FC<AddControlProps> = ({ quantity, onDelete }) => {
   return (
     <div className={styles.addControl}>
       <button
         // onClick={() => updateQuantity(item.id, item.quantity - 1)}
+        onClick={onDelete}
         className={styles.quantityButton}
         aria-label="Decrease quantity"
         aria-controls="cart-item-quantity"

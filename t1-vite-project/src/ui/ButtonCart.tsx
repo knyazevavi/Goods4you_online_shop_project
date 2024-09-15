@@ -1,18 +1,23 @@
 import React from "react";
 
-import { ButtonProps } from "./types/types";
+import { ButtonCartProps } from "./types/types";
 import AddControl from "./AddControl/AddControl";
 import ButtonCartIcon from "./ButtonCartIcon";
 
 import styles from "./Buttons.module.css";
 
-const ButtonCart: React.FC<ButtonProps> = ({ onAdd, id }) => {
+const ButtonCart: React.FC<ButtonCartProps> = ({
+  onAdd,
+  onDelete,
+  id,
+  productIdx,
+}) => {
   return (
     <div className={styles.buttonsCartControl}>
-      {id !== 4 ? (
+      {!productIdx?.includes(id) ? (
         <ButtonCartIcon onAdd={onAdd} />
       ) : (
-        <AddControl quantity={1} />
+        <AddControl quantity={1} onDelete={onDelete} />
       )}
       {/* {quantity === 0 ? (
         <button onClick={onAdd} className={styles.buttonCartIcon}>

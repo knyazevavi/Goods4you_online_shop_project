@@ -19,7 +19,9 @@ const items = Array.from({ length: 12 }, (_, index) => ({
 
 const Grid: React.FC = () => {
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const { cartItems, addToCart, removeFromCart } = useCart();
+  const cartIdx = cartItems.map((item: CartItem) => item.idx);
+  console.log(cartIdx);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   // const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
@@ -41,6 +43,10 @@ const Grid: React.FC = () => {
     //   ...prev,
     //   [item.id]: (prev[item.id] || 0) + 1,
     // }));
+  };
+
+  const handleDeteleFromCart = (id: number) => {
+    removeFromCart(id);
   };
 
   //сделать удаление и добавление товаров в корзину
@@ -67,7 +73,7 @@ const Grid: React.FC = () => {
         return (
           <div
             key={item.idx}
-            className={`${styles.gridItem} ${item.idx === 2 ? styles.alwaysShowOverlay : ""} ${item.idx === 4 ? styles.gridItemInCart : ""}`}
+            className={`${styles.gridItem}`}
             onMouseEnter={() => handleMouseEnter(item.idx)}
             onMouseLeave={handleMouseLeave}
           >
@@ -83,21 +89,17 @@ const Grid: React.FC = () => {
                 </div>
               )}
             </div>
-            <div
-              className={
-                item.idx == 4
-                  ? // cartItems.length > 0
-                    `${styles.itemContent}${styles.expansionColumn}`
-                  : styles.itemContent
-              }
-            >
+            <div className={styles.itemContent}>
               <div className={styles.itemInfo} onClick={handleClickItem}>
                 <p
-                  className={`${
-                    hoveredItem === item.idx
-                      ? styles.itemDescriptionHover
-                      : styles.itemDescription
-                  } ${item.idx === 4 ? styles.itemDescriptionInCart : ""}`}
+                  // className={`${
+                  //   hoveredItem === item.idx
+                  //     ? styles.itemDescriptionHover
+                  //     : styles.itemDescription
+                  // } ${cartIdx.includes(item.idx) ? styles.itemDescriptionInCart : ""}`}
+                  className={` ${styles.itemDescription} ${
+                    hoveredItem === item.idx ? styles.itemDescriptionHover : ""
+                  } ${cartIdx.includes(item.idx) ? styles.itemDescriptionInCart : ""}`}
                 >
                   {item.description}
                 </p>
@@ -105,7 +107,9 @@ const Grid: React.FC = () => {
               </div>
               <ButtonCart
                 onAdd={() => handleAddToCart(item)}
+                onDelete={() => handleDeteleFromCart(item.idx)}
                 id={item.idx}
+                productIdx={cartIdx}
                 // onIncrease={() => increaseQuantity(item.id)}
                 // onDecrease={() => decreaseQuantity(item.id)}
                 // quantity={quantities[item.id] || 0}
