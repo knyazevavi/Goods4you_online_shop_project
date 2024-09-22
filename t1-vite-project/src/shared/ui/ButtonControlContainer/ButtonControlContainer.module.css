@@ -1,0 +1,13 @@
+.buttonsCartControl {
+  display: flex;
+  /* align-items: flex-start; */
+  width: fit-content;
+}
+.itemControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 286px;
+  gap: 10px;
+  height: 50px;
+}

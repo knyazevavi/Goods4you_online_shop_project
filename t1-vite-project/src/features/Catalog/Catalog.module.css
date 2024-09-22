@@ -1,0 +1,36 @@
+.catalog {
+  position: relative;
+  display: block;
+  color: var(--color-gray900);
+  width: 1180px;
+  /* height: 1864px; */
+  margin: 48px auto;
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+  line-height: 56px;
+  font-weight: var(--font-weight-bold);
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1); /* Легкая обводка */
+  border-left-color: #22a6b3; /* Цвет вращающейся части */
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

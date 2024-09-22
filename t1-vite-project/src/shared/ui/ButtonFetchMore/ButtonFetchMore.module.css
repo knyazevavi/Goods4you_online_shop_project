@@ -1,0 +1,80 @@
+.buttonShoppingWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.buttonShopping {
+  padding: 20px 50px;
+  /* margin: 20px auto; */
+  background-color: var(--color-orange);
+  gap: 10px;
+  border: none;
+  border-radius: 4px;
+  width: 207px;
+  height: 62px;
+  text-decoration: none;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.buttonShopping:hover {
+  background-color: var(--color-orangeDark);
+}
+
+/* .counterContainer {
+  display: flex;
+  align-items: center;
+}
+
+.minusButton,
+.plusButton {
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-orange);
+  border: none;
+  color: --color-white;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0;
+}
+
+.minusButton {
+  width: 20px;
+}
+
+.itemCount {
+  margin: 0 10px;
+  font-size: --font-size-m;
+  font-weight: bold;
+}
+
+.plusButton {
+  width: 30px;
+}
+
+@media (max-width: 768px) {
+  .buttonShopping {
+    padding: 12px 20px;
+    width: 103px;
+    height: 31px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttonShoppingWrapper {
+    margin: 30px 0;
+  }
+
+  .buttonShopping {
+    padding: 5px 10px;
+    width: 50px;
+    height: 15px;
+    font-size: 5px;
+  }
+} */

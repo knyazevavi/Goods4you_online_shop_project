@@ -1,0 +1,19 @@
+.addControl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity {
+  line-height: 19.6px;
+  font-size: var(--font-size-s);
+}
+
+.deleteButton {
+  background: none;
+  color: var(--color-gray500);
+  border: none;
+  cursor: pointer;
+  font-size: var(--font-size-m);
+  text-decoration: none;
+}
