@@ -1,0 +1,46 @@
+.cartSummary {
+  display: flex;
+  flex-direction: column;
+  width: 356px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.common {
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--color-gray500);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: var(--font-size-l);
+  color: var(--color-gray500);
+  line-height: 30px;
+}
+
+.value {
+  font-size: var(--font-size-l);
+  color: var(--color-gray900);
+  line-height: 30px;
+}
+
+.totalLabel {
+  font-size: var(--font-size-l);
+  color: var(--color-gray500);
+  line-height: 36px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.totalValue {
+  font-size: var(--font-size-xl);
+  color: var(--color-gray900);
+  line-height: 36px;
+  font-weight: var(--font-weight-bold);
+}

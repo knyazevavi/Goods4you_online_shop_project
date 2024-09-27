@@ -1,0 +1,16 @@
+.pageNotFound {
+  display: flex;
+  flex-direction: column;
+  max-height: 990px;
+  min-height: 100vh;
+  width: 100%;
+  color: var(--color-gray900);
+}
+
+.textNotFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  flex-grow: 1;
+}
