@@ -1,0 +1,41 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1180px;
+  height: 44px;
+}
+
+@media (max-width: 768px) {
+  .menuList {
+    gap: 2.4vw;
+  }
+
+  .menuItem {
+    font-size: 1.75vw;
+  }
+
+  .logo {
+    font-size: 3.6vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    gap: 3vw;
+    align-items: center;
+  }
+
+  .menuList {
+    gap: 3vw;
+  }
+
+  .menuItem {
+    font-size: calc(0.5rem + 1vw);
+  }
+
+  .logo {
+    font-size: calc(0.75rem + 2vw);
+    text-align: center;
+  }
+}

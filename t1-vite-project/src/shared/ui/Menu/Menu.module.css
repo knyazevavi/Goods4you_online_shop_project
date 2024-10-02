@@ -1,0 +1,58 @@
+.menu {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuList {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+}
+
+.menuItem a {
+  text-decoration: none;
+  color: var(--color-white);
+  transition: color 0.3s;
+}
+
+.menuItem a:hover {
+  color: var(--color-gray200);
+  text-decoration: underline;
+}
+
+.cartContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 8px;
+}
+
+.counter {
+  position: absolute;
+  top: 11px;
+  right: -5px;
+
+  background-color: var(--color-orange);
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6px;
+  font-weight: var(--font-weight-regular);
+  line-height: 8px;
+}

@@ -1,0 +1,7 @@
+.productContent {
+  position: relative;
+  max-height: 990px;
+  min-height: 100vh;
+  color: var(--color-gray900);
+  flex-direction: column;
+}
