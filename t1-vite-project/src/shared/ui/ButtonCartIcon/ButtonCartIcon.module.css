@@ -14,9 +14,8 @@
 }
 
 .removedState {
-  margin-left: auto;
+  margin-left: 210px;
 }
 .removedState:hover {
   background-color: var(--color-orangeDark);
-  /* cursor: default; */
 }

@@ -7,6 +7,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     document.title = "Catalog | Goods4you";
   }, []);
+
   return (
     <div>
       <Top />

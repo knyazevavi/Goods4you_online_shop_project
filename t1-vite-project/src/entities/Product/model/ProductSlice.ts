@@ -23,7 +23,6 @@ const productSlice = createSlice({
             state.items = [action.payload];
         }
     },
-    // extraReducers для асинхронных операций
 });
 
 export const { setProducts, setProduct } = productSlice.actions;

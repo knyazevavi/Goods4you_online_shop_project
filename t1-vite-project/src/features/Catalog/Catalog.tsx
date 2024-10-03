@@ -9,13 +9,11 @@ import {
   useLazySearchProductsQuery,
   useSearchProductsQuery,
 } from "../../entities/Product/api/productApi";
-import { useFetchCartItems } from "../../shared";
 
 import styles from "./Catalog.module.css";
 
 const Catalog: React.FC = () => {
   const [limit] = useState(12);
-  const cart = useFetchCartItems(1);
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [initialProducts, setInitialProducts] = useState<ProductItem[]>([]);
   const [initialTotal, setInitialTotal] = useState(0);
@@ -50,13 +48,6 @@ const Catalog: React.FC = () => {
     setIsSearchMode(true);
     setIsLoadMoreDisabled(newProducts.length >= totalItems);
   };
-
-  // console.log(isSearchMode, "isSearchMode");
-  // console.log(products, "products");
-
-  // console.log(initialProducts, "initialProducts");
-  // console.log(initialTotal, "initialTotal");
-  // console.log(loadingStatus, "loadingStatus");
 
   useEffect(() => {
     if (data !== undefined && !isSearchMode) {

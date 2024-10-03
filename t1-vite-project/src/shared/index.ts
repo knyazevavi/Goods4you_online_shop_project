@@ -19,4 +19,3 @@ export * from "./model/types";
 export * from "./hooks/useCart";
 export * from "./hooks/useTotal";
 export * from "./hooks/useFetchCartItems";
-export * from "./constants/constants";

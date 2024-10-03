@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+import { AppDispatch } from "../../../app/store/store";
+import { RootState } from "../../../app/store/store";
 import { ButtonCartProps } from "../../model/types";
 import AddControl from "../AddControl/AddControl";
 import ButtonCartIcon from "../ButtonCartIcon/ButtonCartIcon";
 import ButtonCartAdd from "../ButtonCartAdd/ButtonCartAdd";
 import ButtonDelete from "../ButtonDelete/ButtonDelete";
+import {
+  updateUserCart,
+  addToCart,
+  updateCart,
+  removeFromCart,
+} from "../../../entities/Cart/model/CartSlice";
 
 import styles from "./ButtonControlContainer.module.css";
 
@@ -12,48 +21,39 @@ const ButtonControlContainer: React.FC<ButtonCartProps> = ({
   id,
   type,
   product,
-  onDecrease,
-  onIncrease,
   quantities,
 }) => {
   const currentQuantity = id ? (quantities?.[id] ? quantities?.[id] : 0) : 0;
+  const dispatch = useDispatch<AppDispatch>();
+  const cartItems = useSelector((state: RootState) => state.cart.products);
 
-  const [quantity, setQuantity] = useState<number>(product.quantity || 0);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
+  const cartItem = cartItems.find((item) => item.id === product.id);
+  const quantity = cartItem ? cartItem.quantity : 0;
 
-  const handleIncreaseQuantity = () => {
-    if (product.stock && quantity < product.stock) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-    }
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    dispatch(updateUserCart(userId as number));
   };
 
-  const handleDecreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    } else if (quantity == 1) {
-      setQuantity(0);
-    }
+  const handleUpdateCart = () => {
+    dispatch(updateCart({ id: product.id, quantity: quantity + 1 }));
+    dispatch(updateUserCart(userId as number));
   };
 
-  //TODO- обновлять данные корзины по кнопкам
-  // const dispatch = useDispatch<AppDispatch>();
-  // const cartItems = useSelector((state: RootState) => state.cart.products);
-  // console.log(product, "product");
-  // console.log(cartItems, "cartItems");
+  const handleRemoveFromCart = () => {
+    if (quantity === 1) {
+      dispatch(removeFromCart(product));
+    } else {
+      dispatch(updateCart({ id: product.id, quantity: quantity - 1 }));
+    }
+    dispatch(updateUserCart(userId as number));
+  };
 
-  // const cartItem = cartItems.find((item) => item.id === product.id);
-  // const quantity = cartItem ? cartItem.quantity : 0;
-
-  // const handleIncreaseQuantity = () => {
-  //   dispatch(updateQuantity({ id: product.id, quantity: quantity + 1 }));
-  // };
-
-  // const handleDecreaseQuantity = () => {
-  //   if (quantity === 1) {
-  //     dispatch(removeFromCart(product.id));
-  //   } else {
-  //     dispatch(updateQuantity({ id: product.id, quantity: quantity - 1 }));
-  //   }
-  // };
+  const handleFullDelete = () => {
+    dispatch(removeFromCart(product));
+    dispatch(updateUserCart(userId as number));
+  };
 
   let buttonContent;
 
@@ -61,26 +61,26 @@ const ButtonControlContainer: React.FC<ButtonCartProps> = ({
     case "grid":
       buttonContent =
         currentQuantity === 0 ? (
-          <ButtonCartIcon onAdd={onIncrease} />
+          <ButtonCartIcon onAdd={handleAddToCart} />
         ) : (
           <AddControl
             id={id}
             type="grid"
             quantities={quantities}
-            onAdd={onIncrease}
-            onDelete={onDecrease}
+            onAdd={handleUpdateCart}
+            onDelete={handleRemoveFromCart}
           />
         );
       break;
     case "product":
       buttonContent =
         quantity === 0 ? (
-          <ButtonCartAdd name="Add to cart" onAdd={handleIncreaseQuantity} />
+          <ButtonCartAdd name="Add to cart" onAdd={handleAddToCart} />
         ) : (
           <AddControl
             quantity={quantity}
-            onDelete={handleDecreaseQuantity}
-            onAdd={handleIncreaseQuantity}
+            onDelete={handleRemoveFromCart}
+            onAdd={handleUpdateCart}
           />
         );
       break;
@@ -91,13 +91,13 @@ const ButtonControlContainer: React.FC<ButtonCartProps> = ({
             <>
               <AddControl
                 quantity={quantity}
-                onDelete={handleDecreaseQuantity}
-                onAdd={handleIncreaseQuantity}
+                onDelete={handleRemoveFromCart}
+                onAdd={handleAddToCart}
               />
-              <ButtonDelete />
+              <ButtonDelete onClick={handleFullDelete} />
             </>
           ) : (
-            <ButtonCartIcon isRemoved={true} onAdd={handleIncreaseQuantity} />
+            <ButtonCartIcon isRemoved={true} onAdd={handleAddToCart} />
           )}
         </div>
       );

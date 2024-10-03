@@ -33,7 +33,7 @@ export interface ButtonProps {
     id?: number | undefined;
     href?: string;
     name?: string;
-    onClick?: () => void;
+    onClick?: (e: React.FormEvent) => void;
     onAdd?: () => void;
     isRemoved?: boolean;
 }
@@ -64,4 +64,11 @@ export interface ButtonControlProps {
     control: string;
     onIncrease?: () => void;
     onDecrease?: () => void;
+}
+
+export interface ErrorObj {
+    data: {
+        message: string;
+    };
+    status: number;
 }

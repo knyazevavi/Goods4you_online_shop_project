@@ -15,6 +15,7 @@ interface MenuProps {
 const Menu: React.FC<MenuProps> = ({ isFooter }) => {
   const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart.products);
+  const userInfo = useSelector((state: RootState) => state.auth.user);
   const { calculateTotalProducts } = useTotalPrice();
   const totalProducts = calculateTotalProducts(cartItems);
 
@@ -52,7 +53,9 @@ const Menu: React.FC<MenuProps> = ({ isFooter }) => {
                 </Link>
               </li>
               <li className={styles.menuItem}>
-                <a>Johnson Smith</a>
+                <a>
+                  {userInfo?.firstName} {userInfo?.lastName}
+                </a>
               </li>
             </>
           )}
