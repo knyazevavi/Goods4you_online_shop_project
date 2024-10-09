@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
-import { RootState } from "../../app/store/store";
+import "react-toastify/dist/ReactToastify.css";
 import Total from "../../widgets/Total/Total";
-import { Loading, Warning } from "../../shared";
 import CartDetails from "./ui/CartDetails";
 import { ButtonControlContainer } from "../../shared";
+import { CartItem } from "../../shared";
+import { RootState } from "../../app/store/store";
 
 import styles from "./Cart.module.css";
 
-const Cart: React.FC = () => {
-  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
-  const { products, loading } = useSelector((state: RootState) => state.cart);
-  // console.log(products, "products ");
-  // console.log(loading, "products ");
+interface CartProps {
+  products: CartItem[];
+}
 
-  useEffect(() => {
-    if (loading === "failed" || !products.length) {
-      toast.error("Error loading cart");
-    }
-  }, [loading, products]);
+const Cart: React.FC<CartProps> = ({ products }) => {
+  console.log(products, "products");
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+  const removedItems = useSelector(
+    (state: RootState) => state.cart.removedItems
+  );
 
   const handleMouseEnter = (id: number) => {
     setHoveredItem(id);
@@ -31,10 +29,6 @@ const Cart: React.FC = () => {
     setHoveredItem(null);
   };
 
-  if (loading === "loading") return <Loading />;
-  if (loading === "failed" || !products.length)
-    return <Warning name="No items" />;
-
   return (
     <div className={styles.cartContent}>
       <form className={styles.cartForm}>
@@ -42,7 +36,7 @@ const Cart: React.FC = () => {
           {products.map((item) => (
             <li
               key={item.id}
-              className={`${styles.cartItem} ${hoveredItem === item.id ? styles.itemHover : ""} ${item.quantity === 0 ? styles.itemRemoved : ""}`}
+              className={`${styles.cartItem} ${hoveredItem === item.id ? styles.itemHover : ""}`}
               onMouseEnter={() => handleMouseEnter(item.id)}
               onMouseLeave={handleMouseLeave}
             >
@@ -50,17 +44,35 @@ const Cart: React.FC = () => {
                 discount={item.discountPercentage}
                 refImg={item.thumbnail}
                 title={item.title}
-                hrefProduct={`/product/12`}
+                hrefProduct={`/product/${item.id}`}
                 price={item.price}
                 quantity={item.quantity}
               />
               <ButtonControlContainer product={item} type="cart" />
             </li>
           ))}
+          {removedItems.length > 0 &&
+            removedItems.map((item) => (
+              <li
+                key={item.id}
+                className={`${styles.cartItem} ${hoveredItem === item.id ? styles.itemHover : ""} ${styles.itemRemoved}`}
+                onMouseEnter={() => handleMouseEnter(item.id)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <CartDetails
+                  discount={item.discountPercentage}
+                  refImg={item.thumbnail}
+                  title={item.title as string}
+                  hrefProduct={`/product/${item.id}`}
+                  price={item.price}
+                  quantity={item.quantity as number}
+                />
+                <ButtonControlContainer product={item} type="cart" />
+              </li>
+            ))}
         </ul>
       </form>
       <Total products={products} />
-      <ToastContainer />
     </div>
   );
 };

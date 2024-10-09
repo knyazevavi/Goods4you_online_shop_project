@@ -10,8 +10,6 @@ interface GridDetailsProps {
   id: number;
   hoveredItem: boolean;
   handleClickItem: () => void;
-  onIncrease: () => void;
-  onDecrease: () => void;
   quantities: { [key: number]: number };
 }
 
@@ -20,8 +18,6 @@ const GridDetails: React.FC<GridDetailsProps> = ({
   id,
   hoveredItem,
   handleClickItem,
-  onIncrease,
-  onDecrease,
   quantities,
 }) => {
   const { calculateDiscountedPrice } = useTotalPrice();
@@ -43,8 +39,6 @@ const GridDetails: React.FC<GridDetailsProps> = ({
       <ButtonControlContainer
         product={item}
         type="grid"
-        onIncrease={onIncrease}
-        onDecrease={onDecrease}
         quantities={quantities}
         id={id}
       />

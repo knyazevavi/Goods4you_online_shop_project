@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import React from "react";
+
 import "react-toastify/dist/ReactToastify.css";
 
-import { setProduct } from "./model/ProductSlice";
-import { useFetchProductByIdQuery } from "./api/productApi";
-import { Loading, useTotalPrice, Warning } from "../../shared";
+import { ProductItem, useTotalPrice } from "../../shared";
 
 import ProductImage from "./ui/ProductImage";
 import ProductPrice from "./ui/ProductPrice";
@@ -13,26 +10,12 @@ import ProductDetails from "./ui/ProductDetails";
 
 import styles from "./Product.module.css";
 
-const Product: React.FC = () => {
-  const { data: product, error, isLoading } = useFetchProductByIdQuery(2);
+interface ProductProps {
+  product: ProductItem;
+}
 
-  const dispatch = useDispatch();
+const Product: React.FC<ProductProps> = ({ product }) => {
   const { calculateDiscountedPrice } = useTotalPrice();
-
-  useEffect(() => {
-    if (product) {
-      dispatch(setProduct(product));
-      document.title = `${product.title} | Goods4you | Goods4you`;
-    }
-
-    if (error) {
-      toast.error("Error loading product");
-    }
-  }, [product, error, dispatch]);
-
-  if (isLoading) return <Loading />;
-  if (!product)
-    return <Warning name="Нет данных по продукты или проблемы с загрузкой" />;
 
   return (
     <div className={styles.productContainer}>
@@ -50,8 +33,8 @@ const Product: React.FC = () => {
         />
         <ProductPrice
           product={product}
-          currentPrice={`$${product?.price}` || ""}
-          originalPrice={
+          originalPrice={`$${product?.price}` || ""}
+          currentPrice={
             product?.discountPercentage
               ? `$${calculateDiscountedPrice(product?.price, product?.discountPercentage)}`
               : `$${product?.price}`
@@ -59,7 +42,6 @@ const Product: React.FC = () => {
           discount={`$${product?.discountPercentage}` || ""}
         />
       </div>
-      <ToastContainer />
     </div>
   );
 };

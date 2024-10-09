@@ -1,16 +1,27 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ProductItem } from '../../../shared';
 
+const baseQuery = fetchBaseQuery({
+    baseUrl: 'https://dummyjson.com/',
+    prepareHeaders: (headers) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            headers.set('Authorization', `Bearer ${token}`);
+        }
+        return headers;
+    }
+});
+
 export const productApi = createApi({
     reducerPath: "productApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "https://dummyjson.com/" }),
+    baseQuery,
     endpoints: (builder) => ({
         fetchProductById: builder.query<ProductItem, number>({
-            query: (productId) => `products/${productId}`,
+            query: (productId) => `auth/products/${productId}`,
         }),
         searchProducts: builder.query<{ products: ProductItem[], total: number }, { search: string, limit: number, skip: number }>({
             query: ({ search = '', limit = 12, skip = 0 }) =>
-                `products/search?q=${search}&limit=${limit}&skip=${skip}`,
+                `auth/products/search?q=${search}&limit=${limit}&skip=${skip}`,
         }),
     })
 

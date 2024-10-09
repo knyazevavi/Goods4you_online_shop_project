@@ -42,24 +42,7 @@ const Grid: React.FC<GridProps> = ({ products }) => {
   };
 
   const handleClickItem = (id: number) => {
-    navigate("/product/12");
-  };
-
-  const handleIncreaseQuantity = (id: number) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 0) + 1,
-    }));
-  };
-
-  const handleDecreaseQuantity = (id: number) => {
-    setQuantities((prev) => {
-      const newQuantity = (prev[id] || 1) - 1;
-      return {
-        ...prev,
-        [id]: newQuantity > 0 ? newQuantity : 0,
-      };
-    });
+    navigate(`/product/${id}`);
   };
 
   return (
@@ -88,8 +71,6 @@ const Grid: React.FC<GridProps> = ({ products }) => {
               id={item.id}
               hoveredItem={hoveredItem === item.id}
               handleClickItem={() => handleClickItem(item.id)}
-              onIncrease={() => handleIncreaseQuantity(item.id)}
-              onDecrease={() => handleDecreaseQuantity(item.id)}
               quantities={quantities}
             />
           </div>
